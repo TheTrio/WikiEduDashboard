@@ -13,8 +13,10 @@ jobs:
       ${{ github.event.workflow_run.event == 'pull_request' }}
     steps:
       - name: 'Download Artifact'
-        uses: actions/download-artifact@v3
+        uses: dawidd6/action-download-artifact@v2
         with:
+          workflow: CI.yml
+          workflow_conclusion: "completed"
           name: coverage-report
 
       - name: 'Comment on PR'
