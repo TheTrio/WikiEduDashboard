@@ -1,7 +1,7 @@
 name: CI
 
 # Controls when the workflow will run
-on: ['push', 'pull_request', 'workflow_dispatch']
+on: ['push', 'pull_request_target', 'workflow_dispatch']
 
 jobs:
   build:
@@ -76,12 +76,12 @@ jobs:
       
       - name: Ruby rspec test suite
         run : COVERAGE=true bundle exec rspec spec/features/articles_edited_spec.rb --color --profile --format documentation
+
+      - name: Comment coverage
+        uses: romeovs/lcov-reporter-action@v0.3.1
+        with:
+          lcov-file: public/js_coverage/lcov.info
+          github-token: ${{ secrets.GITHUB_TOKEN }}
             
       - name: Ruby linting
         run: bundle exec rubocop
-
-      - name: Upload code coverage results
-        uses: actions/upload-artifact@v3
-        with:
-          name: code-coverage-report
-          path: public/js_coverage/lcov.info
