@@ -9,6 +9,8 @@ on:
 jobs:
   download:
     runs-on: ubuntu-latest
+    if: >
+      ${{ github.event.workflow_run.event == 'pull_request' }}
     steps:
       - name: 'Download Artifact'
         uses: actions/download-artifact@v3
