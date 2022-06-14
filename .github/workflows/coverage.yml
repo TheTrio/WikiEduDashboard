@@ -1,0 +1,22 @@
+name: Comment coverage report
+
+on:
+  workflow_run:
+    workflows: ['CI']
+    types:
+      - completed
+jobs:
+  comment:
+    runs-on: ubuntu-latest
+    if: >
+      ${{ github.event.workflow_run.event == 'pull_request' }}
+    steps:
+      - name: Download a single artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: code-coverage-report
+      - name: Comment coverage
+        uses: romeovs/lcov-reporter-action@v0.2.16
+        with:
+          lcov-file: lcov.info
+          github-token: ${{ secrets.GITHUB_TOKEN }}
