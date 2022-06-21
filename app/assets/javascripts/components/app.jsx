@@ -14,5 +14,8 @@ if (navBar) {
 const reactRoot = document.getElementById('react_root');
 
 if (reactRoot) {
-  render(reactRoot);
+  if (module.hot) {
+    module.hot.accept();
+    render(reactRoot);
+  }
 }

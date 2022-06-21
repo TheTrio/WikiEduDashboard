@@ -38,10 +38,10 @@ module.exports = {
         'i18n/*.js'
       ]
     },
-    development: {
-      plugins: [
-        'react-refresh/babel',
-      ]
-    }
+    // development: {
+    //   plugins: [
+    //     'react-refresh/babel',
+    //   ]
+    // }
   }
 };
